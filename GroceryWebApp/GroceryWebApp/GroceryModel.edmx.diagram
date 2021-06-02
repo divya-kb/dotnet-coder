@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7e7c7dd856664b609035c81d06cf6de6" Name="Diagram1">
+        <EntityTypeShape EntityType="GroceriesWebAppModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceriesWebAppModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceriesWebAppModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceriesWebAppModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceriesWebAppModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceriesWebAppModel.Customer" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceriesWebAppModel.Order_Products" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceriesWebAppModel.Order" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceriesWebAppModel.Product" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceriesWebAppModel.ShoppingCartData" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GroceriesWebAppModel.Supplier" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="GroceriesWebAppModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceriesWebAppModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceriesWebAppModel.FK_Orders_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceriesWebAppModel.FK_Order_Products_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceriesWebAppModel.FK_Order_Products_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceriesWebAppModel.FK_Products_Suppliers" ManuallyRouted="false" />
+        <AssociationConnector Association="GroceriesWebAppModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GroceriesWebAppModel.Promotion" Width="1.5" PointX="5.25" PointY="10.875" />
+        <AssociationConnector Association="GroceriesWebAppModel.FK_Promotion_Products" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

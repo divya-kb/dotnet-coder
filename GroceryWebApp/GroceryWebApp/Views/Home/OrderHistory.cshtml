@@ -1,0 +1,116 @@
+﻿@model IEnumerable<GroceryWebApp.Models.OrderHistory>
+@{
+    ViewBag.Title = "OrderHistory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>ORDER HISTORY</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active"> My Orders </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="width:800px; margin:0 auto;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <form action="/Home/OrdersMonthwise" method="get" id="order" class="option">
+                    @*<div class="title-left">*@
+                    <h3 style="font-family: arial;font-weight: 600; color: blue;">Select Month</h3>
+                    @*</div>*@
+
+
+                    <select id="orderName" style="min-height:40px;min-width:100px;" class="form-control" name="orderName" onchange="$('#order').submit()">
+                        <option value=''>All</option>
+                        <option value=11>November</option>
+                        <option value=10>October</option>
+                        <option value=9>September</option>
+                        <option value=8>August</option>
+                        <option value=7>July</option>
+                        <option value=6>June</option>
+                        <option value=5>May</option>
+                        <option value=4>April</option>
+                    </select>
+
+                </form>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <h1>  </h1>
+                </br>
+                @*<a href="@Url.Action("PieChart", "Home")" class="btn hvr-hover">Get Analytics</a>*@
+                <a id="download" class="btn plannerbutton" style="background-color:sandybrown;"><b>Get Analytics</b></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/jscript">
+        var myJsVariable = '@TempData["OrderMonth"]';
+        $('#orderName').val(myJsVariable);
+
+
+        $('#download').click(function () {
+            var Id = $("#orderName").val(); // Dropdown Id
+            var x = (Id == '') ? 0 : Id;
+            window.location.href = '@Url.Action("PieChart", "Home")?monthno=' + x;
+
+        });
+    </script>
+}
+<h1>  </h1>
+<br />
+<table class="cart-page">
+    <tr>
+        <th>
+            Product Name
+        </th>
+        <th>
+            Order Quantity
+        </th>
+        <th>
+            Order Date
+        </th>
+
+        <th>
+            Total Amount
+        </th>
+
+    </tr>
+
+    @foreach (var item in ViewBag.OrderHistory)
+            {
+        <tr>
+            <td>
+                <img src="@String.Format("{0}{1}.jpg",Url.Content("~/images/Products/"), item.PName)" class="img-fluid" style="width:10%;" alt="~/image">&nbsp;<span class="p-name">@item.PName</span>
+
+
+                &nbsp;       <a class="btn plannerbutton" href="@Url.Action("AddToCartOrders", "Home", new { id = item.PID }, null )">Add to Cart</a>
+
+
+            </td>
+            <td>
+
+                <span class="p-name">@item.Order_QTY</span>
+
+            </td>
+            <td>
+
+                <span class="p-name">@item.OrderDate</span>
+
+            </td>
+
+            <td><span class="p-name">@String.Format("{0:c}", item.totalSale)</span> </td>
+
+
+        </tr>
+    }
+
+</table>
+

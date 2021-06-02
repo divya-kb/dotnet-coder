@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "PieChart";
+}
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Pie Chart for @ViewBag.monthly month</h2>
+                 </div>
+        </div>
+    </div>
+</div>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <div style="width:800px; margin:0 auto;">
+     <div id="chartdiv" style="width: 600px; height: 350px;">
+        </div>
+    </div>
+</body>
+
+@section scripts {
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+
+    //Call function after Google Chart is loaded, it is required, otherwise you may get error
+    google.charts.setOnLoadCallback(DrawonLoad);
+
+
+    function  DrawonLoad()
+    {
+        $(function () {
+            $.ajax({
+                type: 'GET',
+                url: '/Home/GetPiechartJSON',
+                success: function (chartsdata) {
+                    // Callback that creates and populates a data table,
+                    // instantiates the pie chart, passes in the data and
+                    // draws it.
+
+                    //get JSONList from Object
+                    var Data = chartsdata.JSONList;
+                    var data = new google.visualization.DataTable();
+
+                    data.addColumn('string', 'CategoryName');
+                    data.addColumn('number', 'PostCount');
+
+                    //Loop through each list data
+                    for (var i = 0; i < Data.length; i++) {
+                        data.addRow([Data[i].CategoryName, Data[i].PostCount]);
+                    }
+
+                    // Instantiate and draw our chart, passing in some options
+                    var chart = new google.visualization.PieChart(document.getElementById('chartdiv'));
+                    
+                    //Draw pie chart command with data and chart options
+                    chart.draw(data,
+                        {
+                            title: "Results showing based on Price Breakup",
+                            position: "top",
+                            fontsize: "20px",
+                            is3D: true
+                        });
+
+                },
+                error: function () {
+                    alert("Error loading data! Please try again.");
+                }
+            });
+        })
+
+    }
+</script>
+
+
+    }

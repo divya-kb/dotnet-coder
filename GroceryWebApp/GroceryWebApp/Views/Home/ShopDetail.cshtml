@@ -1,0 +1,159 @@
+﻿
+@{
+    ViewBag.Title = "ShopDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Shop Detail</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Start Shop Detail  -->
+<div class="shop-detail-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 col-lg-5 col-md-6">
+                <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active"> <img class="d-block w-100" src="@String.Format("{0}{1}.jpg",Url.Content("~/images/Products/"), ViewBag.Product.PName)" alt="First slide"> </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-xl-7 col-lg-7 col-md-6">
+                <div class="single-product-details">
+                    <h2>@ViewBag.Product.PName</h2>
+                    @if (ViewBag.Product.Discount != 0)
+                    {
+                        <h5> <del>@String.Format("{0:c}", ViewBag.Product.UnitPrice)</del> @String.Format("{0:c}", ViewBag.Product.UnitPrice - ViewBag.Product.UnitPrice * ViewBag.Product.Discount / 100)</h5>
+                    }
+                    else
+                    {
+                        <h5> @String.Format("{0:c}", ViewBag.Product.UnitPrice)</h5>
+                    }
+                    @*<p class="available-stock"><span> More than 20 available / <a href="#">8 sold </a></span><p>*@
+                        <h4>Short Description:</h4>
+                    <p>
+                        @ViewBag.Product.Description
+                    </p>
+                    <ul>
+                        <li>
+                            <div class="form-group quantity-box">
+                                <label class="control-label">Quantity</label>
+                                <input id="quantity" class="form-control" value="1" min="1" max="20" type="number">
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="price-box-bar">
+                        <div class="cart-and-bay-btn">
+                            <a class="btn plannerbutton" data-fancybox-close="" href="#">Buy New</a>
+                            @*<a class="btn hvr-hover" data-fancybox-close="" href="@Url.Action("AddToCart", "Home", new { id = ViewBag.Product.PID , quan = quantity.Value }, null )">Add to cart</a>*@
+                            <a class="btn plannerbutton" data-fancybox-close="" href="#" onclick="Change(@ViewBag.Product.PID)">Add to cart</a>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row my-5">
+            <div class="col-lg-12">
+                <div class="title-all text-center">
+                    <h1 style="color:darkgreen;">Recommended Products </h1>
+                    @if (@ViewBag.Product.Category == "Edible Oil")
+                    {
+                        <h2><marquee behavior="scroll" scrollamount="15" direction="left"><span style="font-weight: bold;" class="rainbow">Last Month Top seller brands - Comes at more discounts! - Grab your order Soon</span></marquee></h2>
+                    }
+                    @if (@ViewBag.Product.Category == "Sprouts")
+                    {
+                        <h2><marquee behavior="scroll" scrollamount="15" direction="left"><span style="font-weight: bold;" class="rainbow">Shop with Confidence with our 100% satisfaction guarantee!</span></marquee></h2>
+                    }
+                    @if (@ViewBag.Product.Category == "Detergents")
+                    {
+                        <h2><marquee behavior="scroll" scrollamount="15" direction="left"><span style="font-weight: bold;" class="rainbow">Over 10 million people getting trending items 50 - 80% cheaper than what you pay at local mall</span></marquee></h2>
+                    }
+                    @if (@ViewBag.Product.Category == "Dal Pulses")
+                    {
+                        <h2><marquee behavior="scroll" scrollamount="15" direction="left"><span style="font-weight: bold;" class="rainbow">Popular Organic branded items - Over 10 million people frequently bought this</span></marquee></h2>
+                    }
+                    @if (@ViewBag.Product.Category == "Beverages")
+                    {
+                        <h2><marquee behavior="scroll" scrollamount="15" direction="left"><span style="font-weight: bold;" class="rainbow">Save a lot - Get more discount on bigger purchase - Bigger is better when you pay less for more</span></marquee></h2>
+                    }
+                    @*<p>Alternate Buying Options.</p>*@
+                </div>
+                <div class="featured-products-box owl-carousel owl-theme">
+                    @foreach (var item in ViewBag.SimProducts)
+                    {
+                        <div class="owl-stage-outer">
+                            <div class="item">
+                                <div class="products-single fix">
+                                    <div class="box-img-hover">
+                                        <img src="@String.Format("{0}{1}.jpg",Url.Content("~/images/Products/"), item.PName)" class="img-fluid" alt="Image">
+                                        <div class="mask-icon">
+                                            @*<ul>
+                                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                                </ul>*@
+                                            <a class="cart" href="@Url.Action("AddToCart", "Home", new { id = item.PID }, null)">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                    <div class="why-text">
+                                        <h4>@item.PName</h4>
+                                        <h5> @String.Format("{0:c}", item.UnitPrice)</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- End Cart -->
+@section scripts {
+    <script>
+
+        function Change(pid) {
+
+            var quan = $("#quantity").val();
+            var data = {
+                'quan': quan,
+                'pId': pid
+            };
+            $.ajax({
+                type: 'POST',
+                url: "@(Url.Action("AddToCartDetail", "Checkout"))",
+                data: "{ 'quan': " + quan + ", 'pId': " + pid + "}",
+                contentType: "application/json; charset=utf-8",
+                success: function (msg) {
+                    location.reload();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+        }
+
+    </script>
+}
+
+

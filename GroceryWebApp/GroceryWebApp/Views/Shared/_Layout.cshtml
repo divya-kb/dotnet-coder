@@ -1,0 +1,292 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<!-- Basic -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Site Metas -->
+    <title>GroceryShop - Online Grocery Store</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="~/images/favicon.ico" type="~/image/x-icon">
+    <link rel="apple-touch-icon" href="~/images/apple-touch-icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="~/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/css/custom.css">
+
+    <link rel="stylesheet" href="~/Content/Site.css">
+    <link rel="stylesheet" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body style="margin: 0px;">
+
+    <!-- Start Main Top -->
+    <div class="main-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                    <div class="right-phone-box">
+                        <p>Call US :- <a href="#"> +11 900 800 100</a></p>
+                    </div>
+                    @Html.Partial("_LoginPartial")
+                </div>
+
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                    <div class="text-slid-box">
+                        <div id="offer-box" class="carouselTicker">
+                            <ul class="offer-box">
+                                @*<li>
+                                        <i class="fab fa-opencart"></i> 20% off Entire Purchase Promo code: offT80
+                                    </li>
+                                    <li>
+                                        <i class="fab fa-opencart"></i> 50% - 80% off on Dal &Pulses
+                                    </li>
+                                    <li>
+                                        <i class="fab fa-opencart"></i> Off 10%! Shop Detergents
+                                    </li>
+                                    <li>
+                                        <i class="fab fa-opencart"></i> Off 50%! Shop Now
+                                    </li>
+                                    <li>
+                                        <i class="fab fa-opencart"></i> Off 10%! Shop Edible Oils
+                                    </li>
+                                    <li>
+                                        <i class="fab fa-opencart"></i> 50% - 80% off on Beverages
+                                    </li>*@
+                                <li>
+                                    <i class="fab fa-opencart"></i> Save a lot - Get more discount on bigger purchase
+                                </li>
+                                <li>
+                                    <i class="fab fa-opencart"></i> Save more on detergents purchase
+                                </li>
+                                <li>
+                                    <i class="fab fa-opencart"></i> Earn Loyalty points $1.00 for every $100.00 purchase
+                                </li>
+                                <li>
+                                    <i class="fab fa-opencart"></i> Shop with Confidence with our 100% satisfaction guarantee!
+                                </li>
+                            </ul>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- End Main Top -->
+    <!-- Start Main Top -->
+    <header class="main-header">
+
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+            @*<div class="container">*@
+            <!-- Start Header Navigation -->
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("WelcomePage", "Home")"> <img src="~/images/logo.png" class="logo" alt=""></a>
+            </div>
+            <!-- End Header Navigation -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-menu">
+                <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("About", "Home")">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Home")">Shop New</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("OrderHistory", "Home")">My Orders</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Planner", "Home")">Monthly Planner</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("MyProfile", "Home")">Diet Preferences</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("MyProfile", "Home")">My Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact", "Home")">Contact Us</a></li>
+                </ul>
+
+            </div>
+            <!-- /.navbar-collapse -->
+            <!-- Start Atribute Navigation -->
+            <div class="attr-nav">
+                <ul>
+                    @*<li class="search"><a href="#"><i class="fa fa-search"></i></a></li>*@
+                    <li class="side-menu">
+                        <a href="#">
+                            <i class="fa fa-shopping-bag"></i>
+                            <span class="badge">@ViewBag.CartUnits</span>
+                            <p style="font-size:30px;">My Cart</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- End Atribute Navigation -->
+            @*</div>*@
+
+            <!-- Start Side Menu -->
+            <div class="side">
+                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+                <ul>
+                    <li class="cart-box">
+                        <ul class="cart-list">
+                            @foreach (var c in ViewBag.Cart)
+                            {
+
+                                <li>
+                                    <a href="#" class="photo">
+                                        <img src="@String.Format("{0}{1}.jpg",Url.Content("~/images/Products/"), c.PName)" class="img-fluid" alt="~/image">
+                                    </a>
+                                    <h6><a href="#">@c.PName </a></h6>
+                                    <p>@c.Quantity x - <span class="price">@String.Format("{0:c}", c.UnitPrice)</span></p>
+                                </li>
+                            }
+
+                            <li class="total">
+                                <a href="@Url.Action("Index", "Checkout", new { id = UrlParameter.Optional})" class="btn hvr-hover">VIEW CART</a>
+                                <span class="float-right"><strong>Total</strong>: @String.Format("{0:c}", ViewBag.CartTotalPrice)</span>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- End Side Menu -->
+        </nav>
+        <!-- End Navigation -->
+        <!-- End Main Top -->
+        <!-- Start Top Search -->
+        <div class="top-search">
+            <div class="container">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text" class="form-control" placeholder="Search">
+                    <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Top Search -->
+
+    </header>
+
+
+
+    @*<div class="navbar navbar-theme navbar-fixed-top">
+             <div class="container">
+                 <div class="navbar-header">
+                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                         <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                     </button>
+                     @Html.ActionLink("Online Grocery Store", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                 </div>
+                 <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                             <li>@Html.ActionLink("About", "About", "Home")</li>
+                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                         </ul>
+                     @Html.Partial("_LoginPartial")
+                 </div>
+             </div>
+        </div>*@
+    <div class="body-content">
+        @RenderBody()
+        <hr />
+
+        <footer>
+            <!-- Start Footer  -->
+
+            <div class="footer-main">
+                <div class="container">
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <div class="footer-widget">
+                                <h4>About Groceryshop</h4>
+                                <p>GroceryShop is a online Grocery shopping store. Groceryshop delivers grocery and daily essentials from nearby stores.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <div class="footer-top-box">
+                                <h3>Business Time</h3>
+                                <ul class="list-time">
+                                    <li>Monday - Friday: 08.00am to 05.00pm</li>
+                                    <li>Saturday: 10.00am to 08.00pm</li>
+                                    <li>Sunday: <span>Closed</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <div class="footer-link-contact">
+                                <h4>Contact Us</h4>
+                                <ul>
+                                    <li>
+                                        <p><i class="fas fa-map-marker-alt"></i>Address: William I. Days 4326 <br>North Car Street Berlin,<br> KS 56743 </p>
+                                    </li>
+                                    <li>
+                                        <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-745 360 331</a></p>
+                                    </li>
+                                    <li>
+                                        <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">GroceryShop@gmail.com</a></p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- End Footer  -->
+            @*<p>&copy; @DateTime.Now.Year - Online Grocery Store</p>*@
+        </footer>
+
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+    <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+
+    <!-- ALL JS FILES -->
+    <script src="~/js/jquery-3.2.1.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="~/js/jquery.superslides.min.js"></script>
+    <script src="~/js/bootstrap-select.js"></script>
+    <script src="~/js/inewsticker.js"></script>
+    <script src="~/js/bootsnav.js"></script>
+    <script src="~/js/images-loded.min.js"></script>
+    <script src="~/js/isotope.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/baguetteBox.min.js"></script>
+    <script src="~/js/form-validator.min.js"></script>
+    <script src="~/js/contact-form-script.js"></script>
+    <script src="~/js/custom.js"></script>
+</body>
+</html>

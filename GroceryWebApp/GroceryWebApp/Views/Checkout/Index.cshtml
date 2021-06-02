@@ -1,0 +1,136 @@
+﻿@model GroceryWebApp.ShoppingCartData
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>SHOPPING CART</h2>
+@section scripts {
+    <script>
+        function UpdateTotalPrice() {
+            $.ajax({
+                type: 'GET',
+                url: "@(Url.Action("UpdateTotal", "Checkout"))",
+                contentType: "application/json; charset=utf-8",
+                success: function (msg) {
+                    if (msg.d == "$0.00") {
+                        //location.reload();
+                        return;
+                    }
+
+                    $('#totalPrice').text(msg.d);
+                }
+            })
+        }
+
+        function Change(el, type, pid) {
+            var data = {
+                'type': type,
+                'pId': pid
+            };
+            $.ajax({
+                type: 'POST',
+                url: "@(Url.Action("QuanityChange", "Checkout"))",
+                data:"{ 'type': " + type +", 'pId': " + pid + "}",
+                contentType: "application/json; charset=utf-8",
+                success: function (msg) {
+                    if (msg.d == 0) {
+                        el.parentNode.parentNode.remove();
+                    } else {
+                        $(el).siblings('span')[0].innerHTML = msg.d
+                    }
+                    UpdateTotalPrice()
+                    UpdateIndividualPrice(pid)
+                    location.reload();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    
+                }
+            });
+        }
+
+        function UpdateIndividualPrice(pid) {
+            
+            var data = {
+               'pId': pid
+            };
+            $.ajax({
+                type: 'POST',
+                url: "@(Url.Action("UpdateIndividualPrice", "Checkout"))",
+                data: "{ 'pId': " + pid + "}",
+                contentType: "application/json; charset=utf-8",
+                success: function (msg) {
+                    if (msg.d == "$0.00") {
+                        //location.reload();
+                        return;
+                    }
+
+                    $('#totalProductPrice').text(msg.d);
+                }
+            })
+        }
+
+    </script>
+}
+            
+@if (ViewBag.Cart.Count == 0)
+{
+    <br />
+    <div id="EmptyDataMsg" class="alert alert-info">
+        <strong>Welcome!</strong> Your shopping cart is currently empty. Let's start shopping
+    </div>
+}
+else
+{
+    <table class="cart-page">
+        <tr>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Price per Unit
+            </th>
+            <th>
+                Offer Price per Unit
+            </th>
+            <th>
+                Total Price
+            </th>
+            <th>
+                Quantity
+            </th>
+            
+
+        </tr>
+        @foreach (var item in ViewBag.Cart)
+        {
+            <tr>
+               <td><img src="@String.Format("{0}{1}.jpg",Url.Content("~/images/Products/"), item.PName)" class="img-fluid" style="width:10%;" alt="~/image">&nbsp;<span class="p-name">@item.PName</span> </td>
+                <td><span class="p-name"><del>@String.Format("{0:c}", item.OriginalPrice)</del></span> </td>
+                <td><span class="p-name">@String.Format("{0:c}", item.UnitPrice)</span> </td>
+                <td><span id="totalProductPrice" class="p-name">@String.Format("{0:c}", item.UnitPrice * item.Quantity)</span> </td>
+                <td>
+                    <a class="quantity" onclick="Change(this, 1, @item.PID)">+</a>
+                    <span class="p-name">@item.Quantity</span>
+                    <a class="quantity" onclick="Change(this, 0,  @item.PID)">-</a>
+                    <a class="remove" onclick="Change(this, -1,  @item.PID)">Remove</a>
+                </td>
+            </tr>
+        }
+        <tr><td>Total: </td><td id="totalPrice" colspan="4">@String.Format("{0:c}", ViewBag.CartTotalPrice)</td></tr>
+        <tr><td>Loyalty Points: <a style="font-family: arial;font-weight: 600; padding-right: 2px;color: red;">(Earn Loyalty points $1.00 for every $100.00 purchase)</a> </td><td id="loyaltypoints" colspan="4">- @String.Format("{0:c}", ViewBag.CartTotalPrice / 100)</td></tr>
+        <tr><td>Promotional Discount : <a style="font-family: arial;font-weight: 600; padding-right: 2px;color: red;">(Additional 2% discount for regular customers purchasing more than 6 months)</a> </td><td id="extraDiscount" colspan="4">- @String.Format("{0:c}", ViewBag.CartTotalPrice * 2 /100)</td></tr>
+        <tr><td>Total Price to Pay: </td><td id="discountTotalPrice" colspan="4">@String.Format("{0:c}", ViewBag.CartTotalPrice - (ViewBag.CartTotalPrice / 100) - (ViewBag.CartTotalPrice * 2 / 100))  
+                                           
+                                                 <h3 style="font-size: 15px;font-weight: 600; padding-bottom: 2px;color: red;background: yellow;">
+     
+     You Saved additional @String.Format("{0:c}", ViewBag.CartTotalPrice / 100 + (ViewBag.CartTotalPrice * 2 / 100)) on this order</h3>
+                                          
+            </td></tr>
+    </table>
+    <div class="button">
+        @Html.ActionLink("Clear Cart", "Clear", "Checkout", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Countinue", "Purchase", "Checkout", null, new { @class = "btn btn-info" })
+    </div>
+}
+
+
